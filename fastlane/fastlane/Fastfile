@@ -12,10 +12,12 @@
 
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
-
 platform :android do
   desc "Build the Android app"
-  lane :build_android do
-    # Commandes Fastlane pour construire l'application Android
+  lane :build do
+    gradle(
+      task: 'bundle',
+      build_type: 'Release'
+    )
   end
 end
