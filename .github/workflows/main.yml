@@ -9,13 +9,13 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-    - name: Install Expo CLI
-      run: npm install -g expo-cli
-    - name: Login to Expo
-      run: expo whoami
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16' # Use a compatible version of Node.js
+    - name: Install dependencies
+      run: npm install
+    - name: Build Project with EAS
+      run: npx eas build -p android --non-interactive
       env:
-        EXPO_TOKEN: ${{ secrets.EAS_TOKEN }}
-    - name: Build Project with Expo
-      run: expo build:android --non-interactive
-      env:
-        EXPO_TOKEN: ${{ secrets.EAS_TOKEN }}
+        EAS_TOKEN: ${{ secrets.EAS_TOKEN }}
